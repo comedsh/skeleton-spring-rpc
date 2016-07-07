@@ -1,1 +1,5 @@
-include "skeleton-spring-rpc-consumer", "skeleton-spring-rpc-provider"
+include "skeleton-spring-rpc-consumer", 
+		"skeleton-spring-rpc-provider",
+		"skeleton-spring-rpc-provider:skeleton-spring-rpc-provider-remote",
+		"skeleton-spring-rpc-provider:skeleton-spring-rpc-provider-service"
+		

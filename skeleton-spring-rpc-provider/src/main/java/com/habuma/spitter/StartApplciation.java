@@ -1,3 +1,4 @@
+package com.habuma.spitter;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class StartApplciation {
