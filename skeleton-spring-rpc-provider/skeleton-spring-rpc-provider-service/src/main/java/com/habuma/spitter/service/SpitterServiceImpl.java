@@ -16,7 +16,7 @@ import com.habuma.spitter.domain.Spitter;
 import com.habuma.spitter.domain.Spittle;
 
 @Component("spitterService")
-public class SpitterServiceImpl implements SpitterService {
+public class SpitterServiceImpl implements ISpitterService {
 	
 	List<Spittle> spittles = new LinkedList<Spittle>();
 	  

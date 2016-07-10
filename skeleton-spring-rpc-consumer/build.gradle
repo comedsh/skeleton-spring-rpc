@@ -7,6 +7,16 @@ jar {
     }
 }
 
+dependencies {
+
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    
+	compile project(':skeleton-spring-rpc-provider:skeleton-spring-rpc-provider-remote')    
+
+}
+
 test {
     systemProperties 'property': 'value'
 }

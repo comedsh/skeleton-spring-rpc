@@ -5,7 +5,7 @@ import java.util.List;
 import com.habuma.spitter.domain.Spitter;
 import com.habuma.spitter.domain.Spittle;
 
-public interface SpitterService {
+public interface ISpitterService {
   List<Spittle> getRecentSpittles(int count);
   void saveSpittle(Spittle spittle);
   

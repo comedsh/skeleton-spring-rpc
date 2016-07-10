@@ -1,13 +1,12 @@
-package com.habuma.spitter.domain;
+package com.habuma.spitter.remote.dto;
 
 import java.io.Serializable;
 
-public class Spitter implements Serializable{
-  /**
-	 * 
-	 */
-	private static final long serialVersionUID = -458777943945067058L;
-	
+import org.apache.commons.lang.StringUtils;
+
+public class SpitterDTO implements Serializable{
+
+  private static final long serialVersionUID = -458777943945067058L;
 	
   private Long id;
   private String username;
@@ -15,16 +14,8 @@ public class Spitter implements Serializable{
   private String fullName;
   private String email;  
   private boolean updateByEmail;
-
-  static long MAX_SPITTER_ID = 0;
   
-  public Spitter(){
-	  
-  }
-  
-  public Spitter(String username, String fullName, String email ){
-	  
-	  this.id = ++ MAX_SPITTER_ID;
+  public SpitterDTO(String username, String fullName, String email ){
 	  
 	  this.username = username;
 	  
@@ -85,13 +76,13 @@ public class Spitter implements Serializable{
   
   @Override
   public boolean equals(Object obj) {
-    Spitter other = (Spitter) obj;
-    return other.fullName.equals(fullName) && other.username.equals(username) && other.password.equals(password);
+    SpitterDTO other = (SpitterDTO) obj;
+    return other.getFullName().equals(this.fullName) && StringUtils.equals(other.getUsername(), this.username) && StringUtils.equals(other.getPassword(), this.password);
   }
   
   @Override
   public int hashCode() {
-    // TODO Auto-generated method stub
     return super.hashCode();
   }
+  
 }

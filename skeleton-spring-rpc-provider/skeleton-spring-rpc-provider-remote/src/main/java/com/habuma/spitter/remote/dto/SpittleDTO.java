@@ -1,31 +1,22 @@
-package com.habuma.spitter.domain;
+package com.habuma.spitter.remote.dto;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Spittle implements Serializable{
-  /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1508835362555787685L;
+public class SpittleDTO implements Serializable{
+
+  private static final long serialVersionUID = -1508835362555787685L;
 	
   private Long id;
-  private Spitter spitter;
+  private SpitterDTO spitter;
   private String text;
   private Date when;
 
   static long MAX_SPITTLE_ID;
   
-  public Spittle() {
-    this.spitter = new Spitter();  // HARD-CODED FOR NOW
-    this.spitter.setId((long)1);
-  }
-  
-  public Spittle( Spitter spitter, String text, Date when ){
+  public SpittleDTO( SpitterDTO spitterDto, String text, Date when ){
 	  
-	  this.id = ++ MAX_SPITTLE_ID;
-	  
-	  this.spitter = spitter;
+	  this.spitter = spitterDto;
 	  
 	  this.text = text;
 	  
@@ -57,11 +48,11 @@ public class Spittle implements Serializable{
     this.when = when;
   }
 
-  public Spitter getSpitter() {
+  public SpitterDTO getSpitterDTO() {
     return this.spitter;
   }
 
-  public void setSpitter(Spitter spitter) {
+  public void setSpitter(SpitterDTO spitter) {
     this.spitter = spitter;
   }
 }

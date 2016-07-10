@@ -3,18 +3,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.habuma.spitter.domain.Spitter;
-import com.habuma.spitter.domain.Spittle;
-import com.habuma.spitter.service.SpitterService;
+import com.habuma.spitter.remote.dto.SpitterDTO;
+import com.habuma.spitter.remote.dto.SpittleDTO;
+import com.habuma.spitter.remote.service.ISpitterRemoteService;
 
 public class SpitterRmiClient {
-
-  public List<Spittle> getSpittles(String userName) {
-    Spitter spitter = spitterService.getSpitter(userName);
+  @Autowired
+  ISpitterRemoteService spitterService;
+	  
+  public List<SpittleDTO> getSpittles(String userName) {
+	  
+    SpitterDTO spitter = spitterService.getSpitter(userName);
+    
     return spitterService.getSpittlesForSpitter(spitter);
+    
   }
 
-  @Autowired
-  SpitterService spitterService;
+
 
 }
