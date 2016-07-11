@@ -22,12 +22,24 @@ public class SpringRPCTest {
 
 	@Autowired
 	@Qualifier("spitterRmiRemoteService")
-	ISpitterRemoteService service;
+	ISpitterRemoteService rmiService;
+	
+	@Autowired
+	@Qualifier("spitterHessionRemoteService")
+	ISpitterRemoteService hessianService; 
+
+	@Autowired
+	@Qualifier("spitterBurlapRemoteService")
+	ISpitterRemoteService burlapService; 	
 	
 	@Before
 	public void before(){
 		
-		service.clear();
+		rmiService.clear();
+		
+		hessianService.clear();
+		
+		burlapService.clear();
 	
 	}
 	
@@ -44,22 +56,67 @@ public class SpringRPCTest {
 		
 		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
 		
-		service.saveSpitter( sr );
+		rmiService.saveSpitter( sr );
 		
-		service.saveSpittle( st1 );
+		rmiService.saveSpittle( st1 );
 		
-		service.saveSpittle( st2 );
+		rmiService.saveSpittle( st2 );
 		
-		service.saveSpittle( st3 );
+		rmiService.saveSpittle( st3 );
 		
-		assertEquals( 3, service.getSpittlesForSpitter( sr ).size() );
+		assertEquals( 3, rmiService.getSpittlesForSpitter( sr ).size() );
 		
-		assertEquals( "shangyang", service.getSpitter("sh").getFullName() );
+		assertEquals( "shangyang", rmiService.getSpitter("sh").getFullName() );
 		
 	}
 	
 	@Test
 	public void testHession(){
+
+		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+		
+		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
+		
+		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
+		
+		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
+		
+		hessianService.saveSpitter( sr );
+		
+		hessianService.saveSpittle( st1 );
+		
+		hessianService.saveSpittle( st2 );
+		
+		hessianService.saveSpittle( st3 );
+		
+		assertEquals( 3, hessianService.getSpittlesForSpitter( sr ).size() );
+		
+		assertEquals( "shangyang", hessianService.getSpitter("sh").getFullName() );		
+		
+	}
+	
+	@Test
+	public void testBurlap(){
+		
+		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+		
+		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
+		
+		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
+		
+		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
+		
+		burlapService.saveSpitter( sr );
+		
+		burlapService.saveSpittle( st1 );
+		
+		burlapService.saveSpittle( st2 );
+		
+		burlapService.saveSpittle( st3 );
+		
+		assertEquals( 3, burlapService.getSpittlesForSpitter( sr ).size() );
+		
+		assertEquals( "shangyang", burlapService.getSpitter("sh").getFullName() );		
 		
 	}
 	

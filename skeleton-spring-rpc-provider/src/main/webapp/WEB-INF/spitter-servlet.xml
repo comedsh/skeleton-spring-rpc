@@ -17,7 +17,9 @@
 			
 			<value>
 				
-				/spitter.service=spitterHessianRemoteService
+				/spitter.hessian.service=spitterHessianRemoteService
+				
+				/spitter.burlap.service=spitterBurlapRemoteService
 				
 			</value>
 			

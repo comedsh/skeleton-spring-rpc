@@ -28,7 +28,12 @@
 	      
   	<bean id="spitterHessionRemoteService" 
      	  class="org.springframework.remoting.caucho.HessianProxyFactoryBean"
-   		  p:serviceUrl="http://localhost:8080/Spitter/spitter.service"
-   		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />   	      
+   		  p:serviceUrl="http://localhost:8080/spitter.hessian.service"
+   		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />   	  
+   		  
+  	<bean id="spitterBurlapRemoteService" 
+     	  class="org.springframework.remoting.caucho.BurlapProxyFactoryBean"
+   		  p:serviceUrl="http://localhost:8080/spitter.burlap.service"
+   		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />     		      
  	
 </beans>        
