@@ -35,5 +35,10 @@
      	  class="org.springframework.remoting.caucho.BurlapProxyFactoryBean"
    		  p:serviceUrl="http://localhost:8080/spitter.burlap.service"
    		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />     		      
+
+  	<bean id="spitterHttpInvokerRemoteService" 
+     	  class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean"
+   		  p:serviceUrl="http://localhost:8080/spitter.httpinvoker.service"
+   		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />     	   		  
  	
 </beans>        

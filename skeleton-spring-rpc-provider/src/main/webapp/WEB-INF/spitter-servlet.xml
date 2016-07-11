@@ -21,6 +21,8 @@
 				
 				/spitter.burlap.service=spitterBurlapRemoteService
 				
+				/spitter.httpinvoker.service=spitterHttpInvokerRemoteService
+				
 			</value>
 			
 		</property>

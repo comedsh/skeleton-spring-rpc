@@ -33,5 +33,9 @@
     <bean id="spitterBurlapRemoteService" class="org.springframework.remoting.caucho.BurlapServiceExporter"
     	  p:service-ref="spitterRemoteService"
     	  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />
+
+    <bean id="spitterHttpInvokerRemoteService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"
+    	  p:service-ref="spitterRemoteService"
+    	  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />
  	
 </beans>        

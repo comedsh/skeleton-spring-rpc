@@ -31,6 +31,11 @@ public class SpringRPCTest {
 	@Autowired
 	@Qualifier("spitterBurlapRemoteService")
 	ISpitterRemoteService burlapService; 	
+
+	@Autowired
+	@Qualifier("spitterHttpInvokerRemoteService")
+	ISpitterRemoteService httpInvokerService; 	
+	
 	
 	@Before
 	public void before(){
@@ -40,6 +45,8 @@ public class SpringRPCTest {
 		hessianService.clear();
 		
 		burlapService.clear();
+		
+		httpInvokerService.clear();
 	
 	}
 	
@@ -122,6 +129,26 @@ public class SpringRPCTest {
 	
 	@Test
 	public void testHttpInvoker(){
+		
+		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+		
+		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
+		
+		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
+		
+		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
+		
+		httpInvokerService.saveSpitter( sr );
+		
+		httpInvokerService.saveSpittle( st1 );
+		
+		httpInvokerService.saveSpittle( st2 );
+		
+		httpInvokerService.saveSpittle( st3 );
+		
+		assertEquals( 3, httpInvokerService.getSpittlesForSpitter( sr ).size() );
+		
+		assertEquals( "shangyang", httpInvokerService.getSpitter("sh").getFullName() );	
 		
 	}
 	
