@@ -1,3 +1,9 @@
+// build gradle for skeleton-spring-rpc-provider
+
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+
 version = '1.0'
 
 jar {
@@ -5,6 +11,18 @@ jar {
         attributes 'Implementation-Title': 'Gradle Quickstart',
                    'Implementation-Version': version
     }
+}
+
+dependencies {
+
+	compile group: 'com.caucho', name: 'hessian', version: '4.0.38'
+	
+	compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.0.RELEASE'
+
+	compile project(':skeleton-spring-rpc-provider:skeleton-spring-rpc-provider-remote')    
+    
+	compile project(':skeleton-spring-rpc-provider:skeleton-spring-rpc-provider-service')    
+
 }
 
 test {

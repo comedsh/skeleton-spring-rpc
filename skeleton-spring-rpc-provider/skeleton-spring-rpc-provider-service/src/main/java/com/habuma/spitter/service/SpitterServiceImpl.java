@@ -149,4 +149,12 @@ public class SpitterServiceImpl implements ISpitterService {
 		return null;
 		
 	}
+
+	public void clear() {
+		
+		this.spitters.clear();
+		
+		this.spittles.clear();
+		
+	}
 }

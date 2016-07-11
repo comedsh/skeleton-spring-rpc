@@ -21,4 +21,7 @@ public interface ISpitterService {
   void deleteSpittle(long id);
   
   List<Spitter> getAllSpitters();
+  
+  void clear();
+  
 }

@@ -1,4 +1,4 @@
-sourceCompatibility = 1.5
+apply plugin: 'eclipse'
 
 version = '1.0'
 

@@ -23,7 +23,15 @@
 
 	<bean class="org.springframework.remoting.rmi.RmiServiceExporter"
 	      p:service-ref="spitterRemoteService"
-	      p:serviceName="SpitterRemoteService" 
+	      p:serviceName="SpitterRmiRemoteService" 
 	      p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />
+
+    <bean id="spitterHessianRemoteService" class="org.springframework.remoting.caucho.HessianServiceExporter"
+    	  p:service-ref="spitterRemoteService"
+    	  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />
+
+    <bean id="spitterBurlapRemoteService" class="org.springframework.remoting.caucho.BurlapServiceExporter"
+    	  p:service-ref="spitterRemoteService"
+    	  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />
  	
 </beans>        

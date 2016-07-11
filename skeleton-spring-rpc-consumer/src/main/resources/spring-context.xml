@@ -21,9 +21,14 @@
 	
 	<context:component-scan base-package="com.habuma.spitter" />
 
-	<bean id="spitterRemoteService" 
+	<bean id="spitterRmiRemoteService" 
 	      class="org.springframework.remoting.rmi.RmiProxyFactoryBean"
-	      p:serviceUrl="rmi://localhost/SpitterRemoteService"
+	      p:serviceUrl="rmi://localhost/SpitterRmiRemoteService"
 	      p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" /> 	
+	      
+  	<bean id="spitterHessionRemoteService" 
+     	  class="org.springframework.remoting.caucho.HessianProxyFactoryBean"
+   		  p:serviceUrl="http://localhost:8080/Spitter/spitter.service"
+   		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />   	      
  	
 </beans>        

@@ -24,4 +24,6 @@ public interface ISpitterRemoteService {
 	
 	public void saveSpittle(SpittleDTO spittleDto);
 	
+	public void clear();
+	
 }

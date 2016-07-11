@@ -77,6 +77,12 @@ public class SpitterRemoteServiceImpl implements ISpitterRemoteService{
 		
 	}
 
+	public void clear() {
+		
+		service.clear();
+		
+	}
+
 	
 	
 	
