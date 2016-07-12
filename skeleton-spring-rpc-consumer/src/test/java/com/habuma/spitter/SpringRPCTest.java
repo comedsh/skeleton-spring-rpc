@@ -3,10 +3,13 @@ package com.habuma.spitter;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.shangyang.remote.dto.Account;
+import org.shangyang.remote.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,137 +23,228 @@ import com.habuma.spitter.remote.service.ISpitterRemoteService;
 @ContextConfiguration({"/spring-context.xml"})
 public class SpringRPCTest {
 
-	@Autowired
-	@Qualifier("spitterRmiRemoteService")
-	ISpitterRemoteService rmiService;
+//	@Autowired
+//	@Qualifier("spitterRmiRemoteService")
+//	ISpitterRemoteService rmiService;
+//	
+//	@Autowired
+//	@Qualifier("spitterHessionRemoteService")
+//	ISpitterRemoteService hessianService; 
+//
+//	@Autowired
+//	@Qualifier("spitterBurlapRemoteService")
+//	ISpitterRemoteService burlapService; 	
+//
+//	@Autowired
+//	@Qualifier("spitterHttpInvokerRemoteService")
+//	ISpitterRemoteService httpInvokerService; 	
+	
 	
 	@Autowired
-	@Qualifier("spitterHessionRemoteService")
-	ISpitterRemoteService hessianService; 
+	@Qualifier("jaxwsRemoteService")
+	ISpitterRemoteService jaxwsRemoteService; 		
 
 	@Autowired
-	@Qualifier("spitterBurlapRemoteService")
-	ISpitterRemoteService burlapService; 	
-
-	@Autowired
-	@Qualifier("spitterHttpInvokerRemoteService")
-	ISpitterRemoteService httpInvokerService; 	
+	@Qualifier("jaxwsRemoteService2")
+	ISpitterRemoteService jaxwsRemoteService2; 		
 	
+	@Autowired
+	@Qualifier("accountService")
+	IAccountService accountService; // invoke the web service end point delegated by AccountServiceEndPoint
+	
+	@Autowired
+	@Qualifier("accountService2")
+	IAccountService accountService2; // invokes the web service end point direct by AccountServiceImpl
 	
 	@Before
 	public void before(){
 		
-		rmiService.clear();
+//		rmiService.clear();
+//		
+//		hessianService.clear();
+//		
+//		burlapService.clear();
+//		
+//		httpInvokerService.clear();
 		
-		hessianService.clear();
+		//jaxwsRemoteService.clear();
 		
-		burlapService.clear();
-		
-		httpInvokerService.clear();
+		accountService.clear();
 	
 	}
 	
-	@Test 
-	public void testRMI(){
+//	@Test 
+//	public void testRMI(){
+//		
+//		// add a new Spitter
+//		
+//		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+//		
+//		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
+//		
+//		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
+//		
+//		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
+//		
+//		rmiService.saveSpitter( sr );
+//		
+//		rmiService.saveSpittle( st1 );
+//		
+//		rmiService.saveSpittle( st2 );
+//		
+//		rmiService.saveSpittle( st3 );
+//		
+//		assertEquals( 3, rmiService.getSpittlesForSpitter( sr ).size() );
+//		
+//		assertEquals( "shangyang", rmiService.getSpitter("sh").getFullName() );
+//		
+//	}
+//	
+//	@Test
+//	public void testHession(){
+//
+//		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+//		
+//		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
+//		
+//		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
+//		
+//		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
+//		
+//		hessianService.saveSpitter( sr );
+//		
+//		hessianService.saveSpittle( st1 );
+//		
+//		hessianService.saveSpittle( st2 );
+//		
+//		hessianService.saveSpittle( st3 );
+//		
+//		assertEquals( 3, hessianService.getSpittlesForSpitter( sr ).size() );
+//		
+//		assertEquals( "shangyang", hessianService.getSpitter("sh").getFullName() );		
+//		
+//	}
+//	
+//	@Test
+//	public void testBurlap(){
+//		
+//		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+//		
+//		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
+//		
+//		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
+//		
+//		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
+//		
+//		burlapService.saveSpitter( sr );
+//		
+//		burlapService.saveSpittle( st1 );
+//		
+//		burlapService.saveSpittle( st2 );
+//		
+//		burlapService.saveSpittle( st3 );
+//		
+//		assertEquals( 3, burlapService.getSpittlesForSpitter( sr ).size() );
+//		
+//		assertEquals( "shangyang", burlapService.getSpitter("sh").getFullName() );		
+//		
+//	}
+//	
+//	@Test
+//	public void testHttpInvoker(){
+//		
+//		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+//		
+//		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
+//		
+//		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
+//		
+//		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
+//		
+//		httpInvokerService.saveSpitter( sr );
+//		
+//		httpInvokerService.saveSpittle( st1 );
+//		
+//		httpInvokerService.saveSpittle( st2 );
+//		
+//		httpInvokerService.saveSpittle( st3 );
+//		
+//		assertEquals( 3, httpInvokerService.getSpittlesForSpitter( sr ).size() );
+//		
+//		assertEquals( "shangyang", httpInvokerService.getSpitter("sh").getFullName() );	
+//		
+//	}
+	
+	@Test
+	public void testJaxws(){
 		
-		// add a new Spitter
-		
-		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+		// 参看 testJaxws2() 代码逻辑，参数对象不能使用带参的构造函数，否则会出现 javax.xml.ws.WebServiceException: java.net.SocketException: Unexpected end of file from server
+		SpitterDTO sr = new SpitterDTO();
+		sr.setUsername("sh");
+		sr.setFullName("shangyang");
+		sr.setEmail("comedshang@163.com");
 		
 		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
+		st1.setSpitter(sr);
+		st1.setText("how are your?");
+		st1.setWhen(new Date());
 		
 		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
+		st2.setSpitter(sr);
+		st2.setText("I'm fine?");
+		st2.setWhen(new Date());
 		
 		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
+		st3.setSpitter(sr);
+		st3.setText("and you?");
+		st3.setWhen(new Date());
 		
-		rmiService.saveSpitter( sr );
+		jaxwsRemoteService2.saveSpitter( sr );
 		
-		rmiService.saveSpittle( st1 );
+		jaxwsRemoteService2.saveSpittle( st1 );
 		
-		rmiService.saveSpittle( st2 );
+		jaxwsRemoteService2.saveSpittle( st2 );
 		
-		rmiService.saveSpittle( st3 );
+		jaxwsRemoteService2.saveSpittle( st3 );
 		
-		assertEquals( 3, rmiService.getSpittlesForSpitter( sr ).size() );
+		assertEquals( 3, jaxwsRemoteService2.getSpittlesForSpitter( sr ).size() );
 		
-		assertEquals( "shangyang", rmiService.getSpitter("sh").getFullName() );
+		assertEquals( "shangyang", jaxwsRemoteService2.getSpitter("sh").getFullName() );			
 		
 	}
 	
 	@Test
-	public void testHession(){
+	public void testJaxws2(){
+		
+		// 下面这行代码模拟出来了错误
+		// Could not access remote service at [null]; nested exception is javax.xml.ws.WebServiceException: java.net.SocketException: Unexpected end of file from server
+		// 看来，如果使用 Spring JAX-WS 对象参数不能使用带参的构造函数
+		// Account a = new Account("ss");
+		
+		Account a = new Account();
+		
+		a.setName("ss");
+		
+		accountService.insertAccount(a);
+		
+		List<Account> accounts = accountService.getAccounts("ss");
+		
+		assertEquals(accounts.size(), 1);
+		
+	}
 
-		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
-		
-		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
-		
-		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
-		
-		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
-		
-		hessianService.saveSpitter( sr );
-		
-		hessianService.saveSpittle( st1 );
-		
-		hessianService.saveSpittle( st2 );
-		
-		hessianService.saveSpittle( st3 );
-		
-		assertEquals( 3, hessianService.getSpittlesForSpitter( sr ).size() );
-		
-		assertEquals( "shangyang", hessianService.getSpitter("sh").getFullName() );		
-		
-	}
-	
 	@Test
-	public void testBurlap(){
+	public void testJaxws2_2(){
 		
-		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+		Account a = new Account("ss");
 		
-		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
+		accountService2.insertAccount(a);
 		
-		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
+		List<Account> accounts = accountService2.getAccounts("ss");
 		
-		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
+		assertEquals(accounts.size(), 1);
 		
-		burlapService.saveSpitter( sr );
-		
-		burlapService.saveSpittle( st1 );
-		
-		burlapService.saveSpittle( st2 );
-		
-		burlapService.saveSpittle( st3 );
-		
-		assertEquals( 3, burlapService.getSpittlesForSpitter( sr ).size() );
-		
-		assertEquals( "shangyang", burlapService.getSpitter("sh").getFullName() );		
-		
-	}
-	
-	@Test
-	public void testHttpInvoker(){
-		
-		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
-		
-		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
-		
-		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
-		
-		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
-		
-		httpInvokerService.saveSpitter( sr );
-		
-		httpInvokerService.saveSpittle( st1 );
-		
-		httpInvokerService.saveSpittle( st2 );
-		
-		httpInvokerService.saveSpittle( st3 );
-		
-		assertEquals( 3, httpInvokerService.getSpittlesForSpitter( sr ).size() );
-		
-		assertEquals( "shangyang", httpInvokerService.getSpitter("sh").getFullName() );	
-		
-	}
+	}	
 	
 	
 }

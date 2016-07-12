@@ -3,14 +3,17 @@ package com.habuma.spitter.remote.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.Style;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.habuma.spitter.domain.Spitter;
 import com.habuma.spitter.domain.Spittle;
 import com.habuma.spitter.remote.dto.SpitterDTO;
 import com.habuma.spitter.remote.dto.SpittleDTO;
-import com.habuma.spitter.remote.service.ISpitterRemoteService;
 import com.habuma.spitter.service.ISpitterService;
 
 /**
@@ -19,7 +22,9 @@ import com.habuma.spitter.service.ISpitterService;
  * @author 商洋
  *
  */
-@Component("spitterRemoteService")
+@WebService(serviceName="SpitterRemoteService", endpointInterface="com.habuma.spitter.remote.service.ISpitterRemoteService")
+@SOAPBinding(style = Style.RPC)
+@Service("spitterRemoteService")
 public class SpitterRemoteServiceImpl implements ISpitterRemoteService{
 
 	@Autowired
@@ -51,7 +56,7 @@ public class SpitterRemoteServiceImpl implements ISpitterRemoteService{
 		return list;	
 		
 	}
-
+	
 	public SpitterDTO getSpitter(String username) {
 
 		Spitter spitter = service.getSpitter(username);
@@ -82,8 +87,5 @@ public class SpitterRemoteServiceImpl implements ISpitterRemoteService{
 		service.clear();
 		
 	}
-
-	
-	
 	
 }

@@ -20,7 +20,17 @@
   	<context:annotation-config />
 	
 	<context:component-scan base-package="com.habuma.spitter" />
-
+	<context:component-scan base-package="org.shangyang" />
+	
+	<!-- 以下是 JAX-WS 的默认配置，使用 8080 默认的端口，但因为 SimpleJaxWsServiceExporter 使用独立的 JAX-WS 容器，所以端口必须和 web server 的端口不同  -->
+	<!--  
+	<bean class = "org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter"/>
+	-->
+	
+	<!-- 定制 -->
+	 
+	<bean class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter" p:baseAddress="http://localhost:8888/webservices/"/>
+	 
 	<bean class="org.springframework.remoting.rmi.RmiServiceExporter"
 	      p:service-ref="spitterRemoteService"
 	      p:serviceName="SpitterRmiRemoteService" 
@@ -36,6 +46,6 @@
 
     <bean id="spitterHttpInvokerRemoteService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter"
     	  p:service-ref="spitterRemoteService"
-    	  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />
+    	  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" /> 
  	
 </beans>        

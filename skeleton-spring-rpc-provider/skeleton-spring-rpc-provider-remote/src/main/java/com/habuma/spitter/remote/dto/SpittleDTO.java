@@ -7,16 +7,21 @@ public class SpittleDTO implements Serializable{
 
   private static final long serialVersionUID = -1508835362555787685L;
 	
-  private Long id;
-  private SpitterDTO spitter;
+  private long id;
+  
+  private SpitterDTO spitterDto;
+  
   private String text;
-  private Date when;
-
-  static long MAX_SPITTLE_ID;
+  
+  private Date when; 
+  
+  public SpittleDTO(){
+	  
+  }
   
   public SpittleDTO( SpitterDTO spitterDto, String text, Date when ){
 	  
-	  this.spitter = spitterDto;
+	  this.spitterDto = spitterDto;
 	  
 	  this.text = text;
 	  
@@ -24,11 +29,11 @@ public class SpittleDTO implements Serializable{
 	  
   }
   
-  public Long getId() {
+  public long getId() {
     return this.id;
   }
   
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
   
@@ -49,10 +54,10 @@ public class SpittleDTO implements Serializable{
   }
 
   public SpitterDTO getSpitterDTO() {
-    return this.spitter;
+    return this.spitterDto;
   }
 
   public void setSpitter(SpitterDTO spitter) {
-    this.spitter = spitter;
+    this.spitterDto = spitter;
   }
 }

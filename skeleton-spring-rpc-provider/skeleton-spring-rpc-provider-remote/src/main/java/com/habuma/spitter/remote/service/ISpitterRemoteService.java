@@ -2,6 +2,8 @@ package com.habuma.spitter.remote.service;
 
 import java.util.List;
 
+import javax.jws.WebService;
+
 import com.habuma.spitter.remote.dto.SpitterDTO;
 import com.habuma.spitter.remote.dto.SpittleDTO;
 
@@ -12,8 +14,9 @@ import com.habuma.spitter.remote.dto.SpittleDTO;
  * @author 商洋
  *
  */
+@WebService
 public interface ISpitterRemoteService {
-
+	
 	public List<SpittleDTO> getSpittlesForSpitter(SpitterDTO spitterDto);
 	
 	public List<SpittleDTO> getSpittlesForSpitter(String username);

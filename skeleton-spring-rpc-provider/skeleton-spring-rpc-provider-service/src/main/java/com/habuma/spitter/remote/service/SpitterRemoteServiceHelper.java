@@ -11,8 +11,6 @@ public class SpitterRemoteServiceHelper {
 	
 		Spitter s = new Spitter( dto.getUsername(), dto.getFullName(), dto.getEmail() );
 		
-		s.setPassword( dto.getPassword() );
-		
 		return s;
 		
 	}
@@ -26,8 +24,6 @@ public class SpitterRemoteServiceHelper {
 	public static SpitterDTO convertToSpitterDTO( Spitter spitter ){
 		
 		SpitterDTO dto = new SpitterDTO( spitter.getUsername(), spitter.getFullName(), spitter.getEmail() );
-		
-		dto.setPassword( spitter.getPassword() );
 		
 		return dto;
 		

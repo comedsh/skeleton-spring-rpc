@@ -20,7 +20,8 @@
   	<context:annotation-config />
 	
 	<context:component-scan base-package="com.habuma.spitter" />
-
+	
+<!-- 
 	<bean id="spitterRmiRemoteService" 
 	      class="org.springframework.remoting.rmi.RmiProxyFactoryBean"
 	      p:serviceUrl="rmi://localhost/SpitterRmiRemoteService"
@@ -39,6 +40,41 @@
   	<bean id="spitterHttpInvokerRemoteService" 
      	  class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean"
    		  p:serviceUrl="http://localhost:8080/spitter.httpinvoker.service"
-   		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />     	   		  
+   		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />    
+ -->
+ 
+ 	<bean id="jaxwsRemoteService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean"
+		  p:wsdlDocumentUrl="http://localhost:8888/webservices/SpitterWebService?wsdl"
+		  p:serviceName="SpitterWebService"
+		  p:portName="SpitterWebServiceEndpointPort"
+		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService"
+		  p:namespaceUri="http://service.remote.spitter.habuma.com/"
+		  /> 
+
+ 	<bean id="jaxwsRemoteService2" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean"
+		  p:wsdlDocumentUrl="http://localhost:8888/webservices/SpitterRemoteService?wsdl"
+		  p:serviceName="SpitterRemoteService"
+		  p:portName="SpitterRemoteServiceImplPort"
+		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService"
+		  p:namespaceUri="http://service.remote.spitter.habuma.com/"
+		  /> 
+		  	
+	<!-- Uses the delegated Entry Point AccountServiceEndpoint-->	  
+	<bean id="accountService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean"
+		  p:wsdlDocumentUrl="http://localhost:8888/webservices/AccountService?wsdl"
+		  p:serviceName="AccountService"
+		  p:portName="AccountServiceEndpointPort"
+		  p:serviceInterface="org.shangyang.remote.service.IAccountService"
+		  p:namespaceUri="http://service.remote.shangyang.org/"
+		  />
+		   			   		  
+	<!-- Uses the direct Entry Point AccountServiceImpl-->
+	<bean id="accountService2" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean"
+		  p:wsdlDocumentUrl="http://localhost:8888/webservices/AccountService2?wsdl"
+		  p:serviceName="AccountService2"
+		  p:portName="AccountServiceImplPort"
+		  p:serviceInterface="org.shangyang.remote.service.IAccountService"
+		  p:namespaceUri="http://service.remote.shangyang.org/"
+		  />
  	
 </beans>        
