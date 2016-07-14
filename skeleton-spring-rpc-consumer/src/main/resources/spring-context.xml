@@ -20,8 +20,7 @@
   	<context:annotation-config />
 	
 	<context:component-scan base-package="com.habuma.spitter" />
-	
-<!-- 
+
 	<bean id="spitterRmiRemoteService" 
 	      class="org.springframework.remoting.rmi.RmiProxyFactoryBean"
 	      p:serviceUrl="rmi://localhost/SpitterRmiRemoteService"
@@ -41,8 +40,7 @@
      	  class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean"
    		  p:serviceUrl="http://localhost:8080/spitter.httpinvoker.service"
    		  p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" />    
- -->
- 
+
  	<bean id="jaxwsRemoteService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean"
 		  p:wsdlDocumentUrl="http://localhost:8888/webservices/SpitterWebService?wsdl"
 		  p:serviceName="SpitterWebService"
