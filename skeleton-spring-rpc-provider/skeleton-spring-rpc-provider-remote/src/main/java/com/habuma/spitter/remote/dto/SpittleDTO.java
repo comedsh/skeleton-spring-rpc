@@ -6,10 +6,10 @@ import java.util.Date;
 public class SpittleDTO implements Serializable{
 
   private static final long serialVersionUID = -1508835362555787685L;
-	
-  private long id;
+
+  SpitterDTO spitterDto;  
   
-  private SpitterDTO spitterDto;
+  private long id;
   
   private String text;
   
@@ -53,11 +53,11 @@ public class SpittleDTO implements Serializable{
     this.when = when;
   }
 
-  public SpitterDTO getSpitterDTO() {
+  public SpitterDTO getSpitterDto() {
     return this.spitterDto;
   }
 
-  public void setSpitter(SpitterDTO spitter) {
-    this.spitterDto = spitter;
+  public void setSpitterDto(SpitterDTO spitterDto) {
+    this.spitterDto = spitterDto;
   }
 }

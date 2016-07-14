@@ -20,6 +20,11 @@ public class AccountServiceEndpoint {
     public void insertAccount(Account acc) {
         biz.insertAccount(acc);
     }
+    
+    @WebMethod(exclude=true)
+    public void insertAccount(String name) {
+        biz.insertAccount(name);
+    }    
 
     @WebMethod
     public List<Account> getAccounts(String name) {

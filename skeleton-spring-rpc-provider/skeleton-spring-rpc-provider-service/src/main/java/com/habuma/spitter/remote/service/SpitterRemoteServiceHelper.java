@@ -17,7 +17,7 @@ public class SpitterRemoteServiceHelper {
 	
 	public static Spittle convertToSpittle( SpittleDTO dto ){
 		
-		return new Spittle( convertToSpitter( dto.getSpitterDTO()), dto.getText(), dto.getWhen() );
+		return new Spittle( convertToSpitter( dto.getSpitterDto()), dto.getText(), dto.getWhen() );
 		
 	}
 	

@@ -3,9 +3,8 @@ package com.habuma.spitter.remote.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
-import javax.jws.soap.SOAPBinding.Style;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +22,13 @@ import com.habuma.spitter.service.ISpitterService;
  *
  */
 @WebService(serviceName="SpitterRemoteService", endpointInterface="com.habuma.spitter.remote.service.ISpitterRemoteService")
-@SOAPBinding(style = Style.RPC)
 @Service("spitterRemoteService")
 public class SpitterRemoteServiceImpl implements ISpitterRemoteService{
 
 	@Autowired
 	ISpitterService service;
 	
+	@WebMethod
 	public List<SpittleDTO> getSpittlesForSpitter(SpitterDTO spitterDto) {
 
 		List<SpittleDTO> list = new ArrayList<SpittleDTO>(5);
@@ -43,6 +42,7 @@ public class SpitterRemoteServiceImpl implements ISpitterRemoteService{
 		return list;
 	}
 
+	@WebMethod
 	public List<SpittleDTO> getSpittlesForSpitter(String username) {
 		
 		List<SpittleDTO> list = new ArrayList<SpittleDTO>(5);
@@ -57,6 +57,7 @@ public class SpitterRemoteServiceImpl implements ISpitterRemoteService{
 		
 	}
 	
+	@WebMethod
 	public SpitterDTO getSpitter(String username) {
 
 		Spitter spitter = service.getSpitter(username);
@@ -70,18 +71,21 @@ public class SpitterRemoteServiceImpl implements ISpitterRemoteService{
 		return null;
 	}
 
+	@WebMethod
 	public void saveSpitter(SpitterDTO spitterDto) {
 		
-		service.saveSpitter( SpitterRemoteServiceHelper.convertToSpitter(spitterDto) );
+		service.saveSpitter( SpitterRemoteServiceHelper.convertToSpitter( spitterDto ) );
 		
 	}
 
+	@WebMethod
 	public void saveSpittle(SpittleDTO spittleDto) {
 		
 		service.saveSpittle( SpitterRemoteServiceHelper.convertToSpittle( spittleDto ) );
 		
 	}
 
+	@WebMethod
 	public void clear() {
 		
 		service.clear();

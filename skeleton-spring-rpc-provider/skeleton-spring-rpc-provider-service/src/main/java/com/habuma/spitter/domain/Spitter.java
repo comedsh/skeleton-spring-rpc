@@ -8,7 +8,7 @@ public class Spitter implements Serializable{
   /**
 	 * 
 	 */
-	private static final long serialVersionUID = -458777943945067058L;
+  private static final long serialVersionUID = -458777943945067058L;
 	
 	
   private Long id;

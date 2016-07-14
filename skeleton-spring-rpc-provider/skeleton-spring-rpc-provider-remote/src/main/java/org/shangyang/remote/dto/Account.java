@@ -4,12 +4,11 @@ import java.io.Serializable;
 
 public class Account implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8974282536452861430L;
 	
-    private String name;
+    String name;
+    
+    Customer customer;
     
     public Account(){
     	
@@ -26,5 +25,13 @@ public class Account implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	
 }

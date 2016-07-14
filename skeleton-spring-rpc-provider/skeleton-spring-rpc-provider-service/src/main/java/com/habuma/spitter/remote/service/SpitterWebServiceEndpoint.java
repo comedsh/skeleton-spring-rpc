@@ -23,8 +23,8 @@ public class SpitterWebServiceEndpoint{
 		
 		return spitterWebService.getSpittlesForSpitter(spitterDto);
 	}
-
-	@WebMethod
+	
+	@WebMethod(exclude=true)
 	public List<SpittleDTO> getSpittlesForSpitter(String username) {
 
 		return spitterWebService.getSpittlesForSpitter(username);

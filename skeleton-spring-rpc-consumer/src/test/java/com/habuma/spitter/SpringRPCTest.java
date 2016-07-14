@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.shangyang.remote.dto.Account;
+import org.shangyang.remote.dto.Customer;
 import org.shangyang.remote.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -179,25 +180,26 @@ public class SpringRPCTest {
 	public void testJaxws(){
 		
 		// 参看 testJaxws2() 代码逻辑，参数对象不能使用带参的构造函数，否则会出现 javax.xml.ws.WebServiceException: java.net.SocketException: Unexpected end of file from server
-		SpitterDTO sr = new SpitterDTO();
-		sr.setUsername("sh");
-		sr.setFullName("shangyang");
-		sr.setEmail("comedshang@163.com");
+		SpitterDTO sr = new SpitterDTO("sh", "shangyang", "comedshang@163.com");
+//		sr.setUsername("sh");
+//		sr.setFullName("shangyang");
+//		sr.setEmail("comedshang@163.com");
 		
 		SpittleDTO st1 = new SpittleDTO(sr, "how are you?", new Date() );
-		st1.setSpitter(sr);
-		st1.setText("how are your?");
-		st1.setWhen(new Date());
+//		st1.setSpitter(sr);
+//		st1.setText("how are your?");
+//		st1.setWhen(new Date());
 		
-		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine?", new Date() );
-		st2.setSpitter(sr);
-		st2.setText("I'm fine?");
-		st2.setWhen(new Date());
+		SpittleDTO st2 = new SpittleDTO(sr, "I'm fine!", new Date() );
+//		st2.setSpitter(sr);
+//		st2.setText("I'm fine?");
+//		st2.setWhen(new Date());
 		
-		SpittleDTO st3 = new SpittleDTO(sr, "and you?", new Date() );
-		st3.setSpitter(sr);
-		st3.setText("and you?");
-		st3.setWhen(new Date());
+		SpittleDTO st3 = new SpittleDTO(sr, "and your?", new Date() );
+//		SpittleDTO st3 = new SpittleDTO();
+//		st3.setSpitter(sr);
+//		st3.setText("and you?");
+//		st3.setWhen(new Date());
 		
 		jaxwsRemoteService2.saveSpitter( sr );
 		
@@ -221,9 +223,15 @@ public class SpringRPCTest {
 		// 看来，如果使用 Spring JAX-WS 对象参数不能使用带参的构造函数
 		// Account a = new Account("ss");
 		
-		Account a = new Account();
+		Account a = new Account("ss");
 		
-		a.setName("ss");
+		//a.setName("ss");
+		
+		Customer c = new Customer("cc");
+		
+		// c.setName("cc");
+		
+		a.setCustomer( c );
 		
 		accountService.insertAccount(a);
 		
@@ -237,6 +245,12 @@ public class SpringRPCTest {
 	public void testJaxws2_2(){
 		
 		Account a = new Account("ss");
+
+		Customer c = new Customer();
+		
+		c.setName("cc");
+		
+		a.setCustomer( c );		
 		
 		accountService2.insertAccount(a);
 		
