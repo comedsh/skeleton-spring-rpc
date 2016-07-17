@@ -5,6 +5,8 @@
        xmlns:context="http://www.springframework.org/schema/context" 
        xmlns:tx="http://www.springframework.org/schema/tx"  
        xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:jms="http://www.springframework.org/schema/jms"
+ 	   xmlns:amq="http://activemq.apache.org/schema/core"       
        xsi:schemaLocation="  
            http://www.springframework.org/schema/aop   
            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
@@ -15,8 +17,11 @@
            http://www.springframework.org/schema/tx   
            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
            http://www.springframework.org/schema/context   
-           http://www.springframework.org/schema/context/spring-context-4.0.xsd">  
-  	
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		   http://activemq.apache.org/schema/core 
+		   http://activemq.apache.org/schema/core/activemq-core.xsd
+		   http://www.springframework.org/schema/jms 
+		   http://www.springframework.org/schema/jms/spring-jms.xsd" >  	
   	<context:annotation-config />
 	
 	<context:component-scan base-package="com.habuma.spitter" />
@@ -25,7 +30,9 @@
 	      class="org.springframework.remoting.rmi.RmiProxyFactoryBean"
 	      p:serviceUrl="rmi://localhost/SpitterRmiRemoteService"
 	      p:serviceInterface="com.habuma.spitter.remote.service.ISpitterRemoteService" /> 	
-	      
+	
+	<!-- 记得 Eclipse 环境中需要将 server.xml 中 server 的相对路径改为 / 否则回报找不到服务 -->  
+	    
   	<bean id="spitterHessionRemoteService" 
      	  class="org.springframework.remoting.caucho.HessianProxyFactoryBean"
    		  p:serviceUrl="http://localhost:8080/spitter.hessian.service"
@@ -74,5 +81,13 @@
 		  p:serviceInterface="org.shangyang.remote.service.IAccountService"
 		  p:namespaceUri="http://service.remote.shangyang.org/"
 		  />
+
+	<amq:connectionFactory id="connectionFactory" brokerURL="tcp://localhost:61616" />
+
+	<amq:queue id="queue" physicalName="spitter.alert.queue" />
+	
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+	 	 <property name="connectionFactory" ref="connectionFactory" />
+	</bean>	
  	
 </beans>        
