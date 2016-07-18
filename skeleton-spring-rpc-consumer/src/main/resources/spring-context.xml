@@ -21,7 +21,8 @@
 		   http://activemq.apache.org/schema/core 
 		   http://activemq.apache.org/schema/core/activemq-core.xsd
 		   http://www.springframework.org/schema/jms 
-		   http://www.springframework.org/schema/jms/spring-jms.xsd" >  	
+		   http://www.springframework.org/schema/jms/spring-jms.xsd" >
+		     	
   	<context:annotation-config />
 	
 	<context:component-scan base-package="com.habuma.spitter" />
@@ -81,13 +82,44 @@
 		  p:serviceInterface="org.shangyang.remote.service.IAccountService"
 		  p:namespaceUri="http://service.remote.shangyang.org/"
 		  />
-
+	
+	<!-- 若不使用 MQ Listener，如下的配置即可 -->
 	<amq:connectionFactory id="connectionFactory" brokerURL="tcp://localhost:61616" />
 
 	<amq:queue id="queue" physicalName="spitter.alert.queue" />
 	
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 	 	 <property name="connectionFactory" ref="connectionFactory" />
-	</bean>	
+	</bean>
+	
+	<!-- 如下定义使用 MQ Listener 的方式，注意新创建一个带有 trusted sources 的 ActiveMQConnectionFactory -->
+	<!-- http://activemq.apache.org/objectmessage.html -->
+	<bean id="connectionFactory2" class="org.apache.activemq.spring.ActiveMQConnectionFactory">
+	    <property name="brokerURL" value="tcp://localhost:61616"/>
+	    <property name="trustedPackages">
+	        <list>
+	            <value>com.habuma.spitter.remote.dto</value>
+	        </list>
+	    </property>
+	</bean>
+	
+<!--
+	http://activemq.apache.org/objectmessage.html 把问题整复杂了，根本就不需要 CAMEL 介入
+	
+	<bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+	    <property name="connectionFactory" ref="connectionFactory2"/>
+	</bean>
+	
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+	    <property name="configuration" ref="jmsConfig"/>
+	</bean>
+	
+-->			
+  	<bean id="spitterHandler" class="com.habuma.spitter.client.mq.SpitterAlertHandler" /> 
+  	
+	<!-- 定义 listener，当有消息的时候才回调 SpitterAlertHandler 提供的接口方法 -->	
+  	<jms:listener-container connection-factory="connectionFactory2">
+    	<jms:listener destination="spitter.alert.queue" ref="spitterHandler" method="processSpitter" />
+  	</jms:listener-container>
  	
 </beans>        

@@ -23,10 +23,22 @@ dependencies {
 	
 	compile group: 'org.springframework', name: 'spring-jms', version: '4.3.0.RELEASE'
 	
-	compile group: 'org.apache.activemq', name: 'activemq-spring', version: '5.13.3'
+	// compile group: 'activemq', name: 'activemq', version: '3.2.4'
+	
+	// compile group: 'org.apache.activemq', name: 'activemq-core', version: '5.7.0'
+	
+	// compile group: 'org.apache.activemq', name: 'activemq-client', version: '5.13.3'
+	
+	compile group: 'org.apache.activemq', name: 'activemq-spring', version: '5.13.3' // 会自动的导入 activemq-client 包
 
 	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
 	
+	// compile group: 'org.apache.camel', name: 'camel-spring', version: '2.17.2'	
+	
+	// compile group: 'org.apache.camel', name: 'camel-core', version: '2.17.2'
+	
+	// compile group: 'org.apache.camel', name: 'camel-jms', version: '2.17.2'
+		
 	// ---->>>>> JMS needed <<<<<------
     
 	compile project(':skeleton-spring-rpc-provider:skeleton-spring-rpc-provider-remote')    

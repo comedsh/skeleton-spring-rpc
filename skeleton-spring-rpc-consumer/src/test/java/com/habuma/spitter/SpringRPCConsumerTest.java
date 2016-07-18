@@ -16,6 +16,7 @@ import org.shangyang.remote.dto.Customer;
 import org.shangyang.remote.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.JmsUtils;
 import org.springframework.test.context.ContextConfiguration;
@@ -277,6 +278,12 @@ public class SpringRPCConsumerTest {
 		
 	}	
 	
+	/**
+	 *  此方式没有使用 listener，在获取 MQ 消息的时候会一直阻塞。
+	 *  
+	 *  奇怪的是，该方式 ActiveMQ 不要求将 SpitterDTO 配置成 trusted class.
+	 *  
+	 */
 	@Test
 	public void testMQ_01(){
 		  
@@ -292,12 +299,36 @@ public class SpringRPCConsumerTest {
 	      
 	      assertEquals("comedshang@163.com", spitterDto.getEmail());	      
 	      
+	      System.out.println(" JMS Object message get received: " + spitterDto.getFullName() );
+	      
 	    } catch (JMSException jmsException) {
 	    	
 	      throw JmsUtils.convertJmsAccessException(jmsException);//<co id="co_throwException"/>
 	      
-	    }
-		  		
+	    }		  		
+		
+	}
+	
+	/**
+	 * 
+	 * Starts Message Queue Listener by starting the Spring Container. 
+	 * 
+	 * Message Queue Listener will invokes the {@link SpitterAlertHandler }
+	 * 
+	 * 测试流程，
+	 * 
+	 * 首先，不启动 Web Server，通过 provider 发送 MQ 消息。
+	 * 其次，启动 Web Server。
+	 * 最后，启动 Consumer 测试。 
+	 * 
+	 * 测试完以后，测试套件还会自动将 Spring Container 给 kill 掉。
+	 *  
+	 */
+	@SuppressWarnings("resource")
+	@Test
+	public void testMQ_02(){
+		
+		new ClassPathXmlApplicationContext("spring-context.xml");
 		
 	}
 	
