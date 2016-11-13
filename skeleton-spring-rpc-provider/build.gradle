@@ -1,10 +1,13 @@
 // build gradle for skeleton-spring-rpc-provider
-
-apply plugin: 'eclipse'
-apply plugin: 'eclipse-wtp'
+apply plugin: 'maven'
+apply plugin: 'java'
 apply plugin: 'war'
+// apply plugin: 'eclipse'
+// apply plugin: 'eclipse-wtp'
 
 version = '1.0'
+
+// sourceCompatibility = 1.7
 
 repositories {
 
@@ -23,7 +26,7 @@ dependencies {
 
 	compile group: 'com.caucho', name: 'hessian', version: '4.0.38'
 	
-	compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.0.RELEASE'
+	testCompile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.0.RELEASE'
 	
 	// ---->>>>> JMS needed <<<<<------
 	
@@ -37,13 +40,13 @@ dependencies {
 	
 	compile group: 'org.apache.activemq', name: 'activemq-spring', version: '5.13.3'
 
-	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+	providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
 	
 	// ---->>>>> JMS needed <<<<<------	
 
 	compile project(':skeleton-spring-rpc-provider:skeleton-spring-rpc-provider-remote')    
     
-	compile project(':skeleton-spring-rpc-provider:skeleton-spring-rpc-provider-service')    
+	compile project(':skeleton-spring-rpc-provider:skeleton-spring-rpc-provider-service')  
 
 }
 

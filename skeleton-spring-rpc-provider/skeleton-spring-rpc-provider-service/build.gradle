@@ -1,5 +1,6 @@
+apply plugin: 'maven'	
 apply plugin: 'java'
-apply plugin: 'eclipse'
+// apply plugin: 'eclipse'
 
 version = '1.0'
 
